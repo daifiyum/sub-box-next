@@ -23,7 +23,7 @@
 </template>
 
 <script setup>
-import EditSub from "@/components/EditSub.vue";
+import EditSub from "./EditSub.vue";
 import { ref, onBeforeMount, onUnmounted } from "vue";
 import { get_sub, sw_sub } from "@/api/home";
 import emitter from "@/utils/emitter";

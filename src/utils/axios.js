@@ -4,8 +4,8 @@ import { useLoginStore } from "@/stores/login";
 
 const service = axios.create({
   // baseURL: "http://localhost:3000",
-  baseURL: "http://192.168.10.8:3000",
-  // baseURL: "",
+  // baseURL: "http://192.168.10.8:3000",
+  baseURL: "",
 });
 
 service.interceptors.request.use(
@@ -28,7 +28,7 @@ service.interceptors.response.use(
   function (error) {
     const loginStore = useLoginStore();
     if (error.response.status === 401) {
-      router.push({ name: "admin" });
+      router.push({ name: "login" });
       loginStore.removeToken();
     }
     return Promise.reject(error);
