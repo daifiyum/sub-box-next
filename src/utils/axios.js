@@ -5,7 +5,7 @@ import { useLoginStore } from "@/stores/login";
 const service = axios.create({
   // baseURL: "http://localhost:3000",
   // baseURL: "http://192.168.10.8:3000",
-  baseURL: "",
+  baseURL: "/api",
 });
 
 service.interceptors.request.use(

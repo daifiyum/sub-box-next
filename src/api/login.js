@@ -4,7 +4,10 @@ import service from "@/utils/axios";
 export function userlogin(data) {
   return service({
     method: "POST",
-    url: "/api/user/login",
+    url: "/login",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
     data,
   });
 }
@@ -13,7 +16,7 @@ export function userlogin(data) {
 export function isSetup() {
   return service({
     method: "GET",
-    url: "/api/user/setup",
+    url: "/user",
   });
 }
 
@@ -21,7 +24,10 @@ export function isSetup() {
 export function setupUser(data) {
   return service({
     method: "POST",
-    url: "/api/user/setup",
+    url: "/user",
     data,
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
   });
 }

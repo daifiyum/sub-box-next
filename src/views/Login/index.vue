@@ -71,7 +71,7 @@ let loginStore = useLoginStore();
 
 onBeforeMount(async () => {
   let res = await isSetup();
-  isRegistered.value = res.isInitialized;
+  isRegistered.value = res.data.is_registered;
 });
 
 let switchText = computed(() => {
@@ -88,7 +88,7 @@ async function submit() {
       username: username.value,
       password: password.value,
     });
-    loginStore.setToken(res.token);
+    loginStore.setToken(res.data.token);
     router.push({ name: "home" });
   } else {
     await setupUser({

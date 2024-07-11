@@ -44,7 +44,7 @@ function signOut() {
 }
 
 // 代理面板地址
-const toProxyManager = ref(`http://${window.location.hostname}:9099/ui/`);
+const toProxyManager = ref(`http://${window.location.hostname}:9090/ui/`);
 </script>
 
 <style lang="scss" scoped></style>

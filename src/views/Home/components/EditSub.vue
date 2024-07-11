@@ -33,7 +33,6 @@
           color="primary"
           hide-details
           inset
-          @update:modelValue="setAutoUpdate(item.id)"
         ></v-switch>
       </v-card-text>
 
@@ -73,7 +72,7 @@
 
 <script setup>
 import { ref, reactive, computed } from "vue";
-import { rm_sub, rw_sub, up_sub, sw_sub } from "@/api/home";
+import { rm_sub, rw_sub, up_sub } from "@/api/home";
 import emitter from "@/utils/emitter";
 
 const { item } = defineProps(["item"]);
@@ -82,9 +81,9 @@ let dialog = ref(false);
 let valid = ref(true);
 let inputRules = reactive([(value) => !!value]);
 let subName = ref(item.name);
-let subLink = ref(item.sub_url);
+let subLink = ref(item.link);
 let loading = ref(false);
-let autoUpdate = ref(item.auto_update === 1 ? true : false);
+let autoUpdate = ref(item.auto_update);
 
 let autoUpdateToNum = computed(() => {
   if (autoUpdate.value) {
@@ -100,7 +99,11 @@ async function rmOne(id) {
 }
 
 async function rwOne(id) {
-  await rw_sub(id, { rename: subName.value, reurl: subLink.value });
+  await rw_sub(id, {
+    name: subName.value,
+    link: subLink.value,
+    auto_update: autoUpdateToNum.value,
+  });
   emitter.emit("reloadData");
   dialog.value = false;
 }
@@ -108,14 +111,7 @@ async function rwOne(id) {
 async function upOne(id) {
   loading.value = true;
   await up_sub(id);
-  if (item.is_selected) {
-    await sw_sub(item.id);
-  }
   loading.value = false;
-}
-
-async function setAutoUpdate(id) {
-  await rw_sub(id, { auto_update: autoUpdateToNum.value });
 }
 </script>
 

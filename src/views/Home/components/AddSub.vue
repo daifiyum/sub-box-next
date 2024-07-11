@@ -38,7 +38,7 @@ async function addSubData() {
   valid.value = !valid.value;
   await add_sub({
     name: "订阅",
-    sub_url: subLink.value,
+    link: subLink.value,
   });
   emitter.emit("reloadData");
   loading.value = false;

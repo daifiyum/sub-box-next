@@ -4,7 +4,7 @@ import service from "@/utils/axios";
 export function get_sub() {
   return service({
     method: "GET",
-    url: "/api/subscribe/list",
+    url: "/subscribe",
   });
 }
 
@@ -12,8 +12,11 @@ export function get_sub() {
 export function add_sub(data) {
   return service({
     method: "POST",
-    url: "/api/subscribe/new",
+    url: "/subscribe",
     data,
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
   });
 }
 
@@ -21,7 +24,7 @@ export function add_sub(data) {
 export function rm_sub(id) {
   return service({
     method: "DELETE",
-    url: `/api/subscribe/remove/${id}`,
+    url: `/subscribe/${id}`,
   });
 }
 
@@ -29,8 +32,11 @@ export function rm_sub(id) {
 export function rw_sub(id, data) {
   return service({
     method: "PUT",
-    url: `/api/subscribe/edit/${id}`,
+    url: `/subscribe/${id}/edit`,
     data,
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
   });
 }
 
@@ -38,14 +44,14 @@ export function rw_sub(id, data) {
 export function up_sub(id) {
   return service({
     method: "PUT",
-    url: `/api/subscribe/update/${id}`,
+    url: `/subscribe/${id}/update`,
   });
 }
 
-// 切换订阅
+// 激活订阅
 export function sw_sub(id) {
   return service({
     method: "PUT",
-    url: `/api/subscribe/switch/${id}`,
+    url: `/subscribe/${id}/active`,
   });
 }

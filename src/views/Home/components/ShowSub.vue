@@ -3,13 +3,13 @@
     <v-col v-for="item in subData" :key="item.id" cols="12" md="6" lg="6">
       <v-card
         elevation="2"
-        :class="{ active: item.is_selected }"
+        :class="{ active: item.active }"
         @click="swOne(item.id)"
       >
         <v-card-item>
           <v-card-title>{{ item.name }}</v-card-title>
           <v-card-subtitle class="my-3">
-            {{ item.sub_url }}
+            {{ item.link }}
           </v-card-subtitle>
         </v-card-item>
 
@@ -32,7 +32,7 @@ let subData = ref([]);
 
 async function fetchData() {
   let res = await get_sub();
-  subData.value = res.subList;
+  subData.value = res.data;
 }
 onBeforeMount(async () => {
   fetchData();
